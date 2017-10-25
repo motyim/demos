@@ -1,3 +1,6 @@
 SpringDataRest/.mvn/
 .idea/
 Demo.iml
+ServiceLocatorDemo/manifest.mf
+ServiceLocatorDemo/build/
+ServiceLocatorDemo/nbproject/
