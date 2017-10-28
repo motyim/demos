@@ -4,3 +4,4 @@ Demo.iml
 ServiceLocatorDemo/manifest.mf
 ServiceLocatorDemo/build/
 ServiceLocatorDemo/nbproject/
+MongoDemo/target/
