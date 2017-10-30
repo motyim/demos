@@ -33,7 +33,7 @@ public class UpdateTest {
         }
 
 //        collection.replaceOne(eq("x",3),new Document("x",20).append("update",true));
-        
+
 //        collection.updateOne(eq("x",3),new Document("$set",new Document("x",20).append("update",true)));
 
 //        collection.updateOne(eq("x",3), Updates.set("x",20));
