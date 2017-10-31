@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Test</title>
+</head>
+<body>
+
+    <p>choose your favorite color</p>
+
+    <form action="test_color" method="post">
+        <#list colors as color>
+            <input type="radio" name="color" value="${color}">${color}</input><br>
+        </#list>
+        <input type="submit">
+    </form>
+
+</body>
+</html>
