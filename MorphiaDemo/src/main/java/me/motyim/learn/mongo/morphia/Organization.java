@@ -2,9 +2,7 @@ package me.motyim.learn.mongo.morphia;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.Version;
-import org.mongodb.morphia.utils.IndexDirection;
 
 import java.util.Date;
 
@@ -15,12 +13,13 @@ import java.util.Date;
 @Entity("orgs")
 public class Organization {
     @Id
-    public String name ;
+    private String name ;
 
-    public Date created ;
+    private Date created ;
     @Version(value = "v")
-    public long version ;
+    private long version ;
 
+    public Organization(){}
     public Organization(String name) {
         this.name = name;
     }
@@ -47,5 +46,10 @@ public class Organization {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "name : "+getName();
     }
 }

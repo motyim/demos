@@ -21,19 +21,19 @@ import java.util.List;
 public class GithubUser {
 
     @Id
-    public String username ;
+    private String username ;
 
-    public String fullname ;
+    private String fullname ;
     @Property(value = "since")      // value will be in mongo db
-    public Date memberSince ;
+    private Date memberSince ;
 
-    public Date lastActive ;
+    private Date lastActive ;
 
-    public List<Repository> repositories = new ArrayList<>();
+    private List<Repository> repositories = new ArrayList<>();
 
-    public int followers ;
+    private int followers ;
 
-    public int following ;
+    private int following ;
 
     public GithubUser(){
 
@@ -97,5 +97,10 @@ public class GithubUser {
 
     public void setFollowing(int following) {
         this.following = following;
+    }
+
+    @Override
+    public String toString() {
+        return "username : "+getUsername() ;
     }
 }

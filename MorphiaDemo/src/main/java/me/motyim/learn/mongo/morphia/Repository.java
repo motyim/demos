@@ -11,13 +11,13 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity("repo")
 public class Repository {
     @Id
-    public String name ;
+    private String name ;
 
     @Reference
-    public Organization organization ;
+    private Organization organization ;
 
     @Reference
-    public  GithubUser owner ;
+    private  GithubUser owner ;
 
     public Repository(){}
 
@@ -53,5 +53,10 @@ public class Repository {
 
     public void setOwner(GithubUser owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "repo name :"+getName()+"\nuser : [" + getOwner() +"]\nOrg : [" + getOrganization()+"]";
     }
 }

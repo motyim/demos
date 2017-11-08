@@ -15,5 +15,8 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib-nodep:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.thoughtworks.proxytoys:proxytoys:1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:6.11" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.beust:jcommander:1.64" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
   </component>
 </module>
