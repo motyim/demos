@@ -8,3 +8,12 @@ MongoDemo/target/
 SparkFreemakerDemo/target/
 MorphiaDemo/target/
 SpringRest/target/
+FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/ArsalanMenuHandler.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/ArsalanMenuHandler$3.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/ArsalanMenuHandler$2.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/ArsalanMenuHandler$1.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/contract/IMenu.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/contract/IItem.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/contract/IResturant.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/Main.class
+FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/Arsalan.class
