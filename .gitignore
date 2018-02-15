@@ -18,3 +18,4 @@ FluentAPI/target/classes/me/motyim/learn/fluentapi/contract/IResturant.class
 FluentAPI/target/classes/me/motyim/learn/fluentapi/Main.class
 FluentAPI/target/classes/me/motyim/learn/fluentapi/impl/Arsalan.class
 RestTemplate/target/
+*.class

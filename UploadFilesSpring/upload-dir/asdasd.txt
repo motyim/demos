@@ -1,0 +1,15 @@
+bio 
+I'm Experienced Software Developer with 3 years experience in development of enterprise Applications from Back-end to Desktop and Web Applications.
+
+My experience cover :
+- Programing Languages Skills (JAVA SE, C, C++, PHP)
+- Java EE (JDBC, JSF, Prime Faces, Servlet &JSP, EJB, RMI, XML, JMS, JAVA Mail, JPA, Hibernate)
+- Spring Framework (Spring Integration, MVC, Security, AOP, Remote Service, Boot)
+- Web Technologies (XML, Web services, AJAX, JavaScript, JSON, HTML, CSS,WordPress )
+- Data Structure, OOP, MVC, I/O and Design Patterns, UML.
+- Strong familiarity with RDBMS such as SQL and PL/SQL(Oracle) 
+- MongoDB and NoSQL
+- Familiar with GIT, Maven
+
+you can visit my website for more details .
+------------------------
