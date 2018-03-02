@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.motyim.learn.webservicerest.server.ws;
 
 import javax.ws.rs.GET;
@@ -11,7 +6,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import me.motyim.learn.webservicerest.server.Respons;
 
 /**
@@ -40,5 +34,13 @@ public class FirstRest {
         return new Respons<>(number2 + number1);
     }
 
+//    @GET
+//    @Path("/sum2/{number1}/{number2}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public GenericEntity<Integer> sum2(@PathParam("number1") int number1, @PathParam("number2") int number2) {
+//       Integer a = number1+number2;
+//        GenericEntity<Integer> aa = new GenericEntity<>(a){};
+//        return null;
+//    }
 
 }
