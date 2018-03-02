@@ -1,5 +1,6 @@
 package me.motyim.learn.webservicerest.server;
 
+import me.motyim.learn.webservicerest.dto.Person;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class Service {
 
     private static final ArrayList<Person> LIST = new ArrayList<>(Arrays.asList(new Person(1, "mohamed"),
              new Person(2, "ahmed"),
-             new Person(3, "mohmoud")));
+             new Person(3, "motyim")));
     
     
 

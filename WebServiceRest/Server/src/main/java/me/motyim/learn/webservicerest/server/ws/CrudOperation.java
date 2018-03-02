@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
-import me.motyim.learn.webservicerest.server.Person;
+import me.motyim.learn.webservicerest.dto.Person;
 import me.motyim.learn.webservicerest.server.Respons;
 import me.motyim.learn.webservicerest.server.Service;
 
@@ -50,6 +50,7 @@ public class CrudOperation {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Respons<Boolean> addPerson(Person person){
+        LOG.info("user added");
         return new Respons<>(SERVICE.add(person));
     }
     

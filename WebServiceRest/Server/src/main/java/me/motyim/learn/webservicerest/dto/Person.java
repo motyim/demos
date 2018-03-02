@@ -1,4 +1,4 @@
-package me.motyim.learn.webservicerest.server;
+package me.motyim.learn.webservicerest.dto;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,5 +49,8 @@ public class Person implements Serializable{
         this.age = age;
     }
     
-    
+    @Override
+    public String toString() {
+        return "Person : {id :"+id+" ,name : "+name+", age : "+age+"}";
+    }
 }
