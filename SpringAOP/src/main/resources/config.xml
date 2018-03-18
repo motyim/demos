@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+">
+    <!--define buisness beans--> 
+    <bean id="calc" class="me.motyim.learn.spring.springaop.classes.CalcImp"/>
+    
+    <!--define aspect beans-->
+    <bean id="AfterLog" class="me.motyim.learn.spring.springaop.aspect.AfterLog"/>
+    <bean id="AroundLog" class="me.motyim.learn.spring.springaop.aspect.AroundLog"/>
+    <bean id="BeforeLog" class="me.motyim.learn.spring.springaop.aspect.BeforeLog"/>
+    <bean id="ThrowLog" class="me.motyim.learn.spring.springaop.aspect.ThrowLog"/>
+    
+    <!--define proxy-->
+    <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean"> 
+        <!--the lines blew which commented aslo right case spring can detected which interface-->  
+        
+<!--        <property name="proxyInterfaces">
+            <list>
+                <value>me.motyim.learn.spring.springaop.classes.Calculator</value>
+            </list>
+        </property>-->
+        <property name="target" ref="calc"/>
+        <property name="interceptorNames">  
+            <list>  
+                <!--arrang is important between around and [after , before]-->
+                <value>BeforeLog</value>  
+                <value>AfterLog</value>  
+                <value>AroundLog</value>  
+                <value>ThrowLog</value>  
+            </list>  
+        </property>  
+    </bean>  
+
+</beans>

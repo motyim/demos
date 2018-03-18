@@ -27,3 +27,7 @@ WebServiceServletContextListener/nb-configuration.xml
 /WebServiceRest/ServerGlassFish/target/
 /WebServiceRest/DeleteITn/nbproject/private/
 /WebServiceRest/DeleteITn/build/
+/WebServiceRest/DeleteAspectDemo/target/
+/SpringAOP/target/
+nb-configuration.xml
+**/classes
