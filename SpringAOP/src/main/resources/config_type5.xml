@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+">
+    <!--define buisness beans--> 
+    <bean id="calc" class="me.motyim.learn.spring.springaop.classes.CalcImp"/>
+    
+    <!--define aspect beans (advisor)-->
+    <bean id="AfterLog" class="me.motyim.learn.spring.springaop.aspect.AfterLog"/>
+    <bean id="AroundLog" class="me.motyim.learn.spring.springaop.aspect.AroundLog"/>
+    <bean id="BeforeLog" class="me.motyim.learn.spring.springaop.aspect.BeforeLog"/>
+    <bean id="ThrowLog" class="me.motyim.learn.spring.springaop.aspect.ThrowLog"/>
+    
+    <!-- Pointcut using regex pattern -->
+    <bean id="regexAdvisor"
+          class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="patterns">
+            <list>
+                <!--regex for add--> 
+                <value>.*dd</value> 
+            </list>
+        </property>
+        <property name="advice" ref="AroundLog" />
+    </bean>
+
+    
+    
+    <!--create proxy for many beans ,, no need to id -->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <!--will match any bean it's name contain this regex-->
+                <value>*calc</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <!--can define advisor many time--> 
+                <value>regexAdvisor</value>
+                <value>AfterLog</value>  
+                <value>AroundLog</value>
+            </list>
+        </property>
+    </bean>  
+   
+</beans>
