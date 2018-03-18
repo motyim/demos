@@ -3,7 +3,7 @@
 this is a simple demo on standalone ActiveMQ Server integrated 
 with spring boot .
 
-######consist of :
+consist of :
    * JmsConfing : create configeration bean to connect with ActiveMQ
    * Producer : which create message and push it to queue
    * Consumer : which listen to each message on queue and print it into console
