@@ -16,6 +16,15 @@ public class CityEntity {
     private long population;
     private Date holiday;
 
+    public CityEntity(){}
+
+    public CityEntity(int id, String cityName, long population, Date holiday) {
+        this.id = id;
+        this.cityName = cityName;
+        this.population = population;
+        this.holiday = holiday;
+    }
+
     @Id
     @Column(name = "id")
     public int getId() {
