@@ -31,3 +31,9 @@ WebServiceServletContextListener/nb-configuration.xml
 /SpringAOP/target/
 nb-configuration.xml
 **/classes
+*.zip
+EntityToDtoConversion/mvnw
+*.cmd
+SpringDataArabic/mvnw
+SpringDataArabic/.mvn/
+EntityToDtoConversion/.mvn/
