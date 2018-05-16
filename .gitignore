@@ -37,3 +37,6 @@ EntityToDtoConversion/mvnw
 SpringDataArabic/mvnw
 SpringDataArabic/.mvn/
 EntityToDtoConversion/.mvn/
+/WebServiceRest/deleteNow/nbproject/private/
+/WebServiceRest/deleteNow/build/
+*.iml
