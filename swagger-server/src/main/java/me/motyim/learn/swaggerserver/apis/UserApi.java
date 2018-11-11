@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 /**
  * @author MA Motyim <mohamed.motyim@gmail.com>
  * @see <www.motyim.me>
@@ -28,5 +30,5 @@ public interface UserApi {
 
     @PostMapping
     @ApiOperation(value = "Add New UserModel", nickname = "CreateUser", notes = "This can done by all users.")
-    ResponseEntity<Response<Void>> AddUser(@RequestBody UserModel userModel);
+    ResponseEntity<Response<Void>> AddUser(@Valid @RequestBody UserModel userModel);
 }

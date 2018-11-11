@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.*;
+
 
 /**
  * @author MA Motyim <mohamed.motyim@gmail.com>
@@ -20,6 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserModel {
     @ApiModelProperty(hidden = true)
     private Long id;
+    @NotBlank
+    @Min(3)
+    @Max(20)
     private String name;
+    @Positive
     private int age ;
 }
