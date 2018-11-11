@@ -39,11 +39,11 @@ public class SwaggerConfig {
     private ApiInfo metaDate() {
         return new ApiInfoBuilder()
                 .title("Spring Boot REST API")
-                .description("\"Spring Boot REST API \"")
+                .description("Spring Boot REST API To Test Generate Client")
                 .version("1.0.0")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                .contact(new Contact("Motyim","www.motyim.me","mohamed.motyim@gmail.com"))
+                .contact(new Contact("Motyim","http://www.motyim.me","mohamed.motyim@gmail.com"))
                 .build();
     }
 
