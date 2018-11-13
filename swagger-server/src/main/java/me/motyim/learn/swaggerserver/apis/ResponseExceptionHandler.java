@@ -1,6 +1,7 @@
 package me.motyim.learn.swaggerserver.apis;
 
 import lombok.extern.slf4j.Slf4j;
+import me.motyim.learn.swaggerserver.exception.UserNotFoundException;
 import me.motyim.learn.swaggerserver.response.ErrorDetails;
 import me.motyim.learn.swaggerserver.response.Response;
 import me.motyim.learn.swaggerserver.response.ResponseEnum;
@@ -33,7 +34,10 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Exist Error Handler");
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
-// TODO: 11/11/2018 Make A Custome Exception
-//    @ExceptionHandler
 
+    // TODO: 11/12/2018 Finish this seniro 
+    @ExceptionHandler(UserNotFoundException.class)
+    protected ResponseEntity<Response> hangleNoUserFound(UserNotFoundException ex){
+        return null;
+    }
 }

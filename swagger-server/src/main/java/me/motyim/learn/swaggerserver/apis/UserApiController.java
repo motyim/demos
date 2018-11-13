@@ -20,7 +20,6 @@ import java.util.List;
  * @since 11/7/2018
  */
 @RestController
-@Slf4j
 public class UserApiController implements UserApi {
 
     @Autowired
@@ -28,7 +27,6 @@ public class UserApiController implements UserApi {
 
     @Override
     public ResponseEntity<Response<UserModel>> getAllUsers() {
-        log.info("Inside Get ALL Users");
         List<UserModel> allUsers = service.getAllUsers();
         Response response = new Response(ResponseEnum.SUCCESS, allUsers);
         return new ResponseEntity<Response<UserModel>>(response,HttpStatus.OK);
@@ -36,10 +34,8 @@ public class UserApiController implements UserApi {
 
     @Override
     public ResponseEntity<Response<Void>> AddUser(UserModel userModel) {
-        log.info("Inside AddUser");
         service.addUser(userModel);
         Response response = new Response(ResponseEnum.SUCCESS, null);
-        log.info("Finish AddUser");
         return new ResponseEntity<Response<Void>>(response,HttpStatus.OK);
     }
 }
