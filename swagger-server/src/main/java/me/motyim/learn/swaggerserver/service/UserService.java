@@ -2,7 +2,8 @@ package me.motyim.learn.swaggerserver.service;
 
 import me.motyim.learn.swaggerserver.model.UserModel;
 
-import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author MA Motyim <mohamed.motyim@gmail.com>
@@ -13,5 +14,7 @@ public interface UserService {
 
     void addUser(UserModel userModel);
 
-    List<UserModel> getAllUsers();
+    Stream<UserModel> getAllUsers();
+
+    Optional<UserModel> getUserById(long userId);
 }

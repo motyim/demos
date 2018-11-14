@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.motyim.learn.swaggerserver.exception.UserNotFoundException;
 import me.motyim.learn.swaggerserver.response.ErrorDetails;
 import me.motyim.learn.swaggerserver.response.Response;
-import me.motyim.learn.swaggerserver.response.ResponseEnum;
+import me.motyim.learn.swaggerserver.enums.ResponseEnum;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 
 /**
@@ -27,17 +28,39 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        log.info("Into Error Handler");
         ErrorDetails errorDetails = new ErrorDetails(new Date(), "Validation Failed",
                 ex.getBindingResult().toString());
-        Response<ErrorDetails> response = new Response<>(ResponseEnum.ERROR ,errorDetails);
-        log.info("Exist Error Handler");
+        Response<ErrorDetails> response = new Response<>(ResponseEnum.VALIDATION_ERROR ,errorDetails);
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
 
-    // TODO: 11/12/2018 Finish this seniro 
+    //handle validation exception on primitive params
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity constraintViolationHandler(ConstraintViolationException ex) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), "Validation Failed",
+                ex.getConstraintViolations().iterator().next().getMessage());
+        Response<ErrorDetails> response = new Response<>(ResponseEnum.VALIDATION_ERROR ,errorDetails);
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+    }
+
+
     @ExceptionHandler(UserNotFoundException.class)
     protected ResponseEntity<Response> hangleNoUserFound(UserNotFoundException ex){
-        return null;
+        ex.printStackTrace();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), "Error In Operation",
+                ex.getMessage());
+        Response<ErrorDetails> response = new Response<>(ResponseEnum.ERROR ,errorDetails);
+        return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+    }
+
+
+
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Response<ErrorDetails>> hangleException(Exception ex){
+        ex.printStackTrace();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), "General Exception",
+                ex.getMessage());
+        Response<ErrorDetails> response = new Response<>(ResponseEnum.ERRORINSERVER ,errorDetails);
+        return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

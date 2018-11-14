@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author MA Motyim <mohamed.motyim@gmail.com>
@@ -30,10 +32,22 @@ public class UserServiceImp implements UserService {
         repository.save(mapedUser);
     }
 
+    // TODO: 11/13/2018 Make this repo return stream
     @Override
-    public List<UserModel> getAllUsers() {
+    public Stream<UserModel> getAllUsers() {
         List<User> allUser = repository.findAll();
         List<UserModel> allUserModel = (List<UserModel>) mapper.map(allUser, ArrayList.class);
-        return allUserModel;
+        return allUserModel.stream();
+    }
+
+    @Override
+    public Optional<UserModel> getUserById(long userId) {
+        Optional<User> user = repository.findById(userId);
+
+        if(! user.isPresent()){
+            return Optional.empty();
+        }
+        UserModel userModel = mapper.map(user.get(), UserModel.class);
+        return Optional.ofNullable(userModel);
     }
 }

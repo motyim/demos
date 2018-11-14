@@ -1,4 +1,4 @@
-package me.motyim.learn.swaggerserver.response;
+package me.motyim.learn.swaggerserver.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,8 +12,8 @@ public enum ResponseEnum {
     SUCCESS(0 ,"Success Response"),
     ERROR(1 ,"ERROR IN PROCESS"),
     TIMEOUT(2 ,"TIMEOUT FROM SERVER"),
-    ERRORINSERVER(3 ,"GENERAL ERROR IN SERVER");
-
+    ERRORINSERVER(3 ,"GENERAL ERROR IN SERVER"),
+    VALIDATION_ERROR(5,"Vaildation Error");
     private int code;
     private String message;
     ResponseEnum(int code , String message) {

@@ -22,8 +22,10 @@ public class UserModel {
     @ApiModelProperty(hidden = true)
     private Long id;
     @NotBlank
-//    @Min(3)
+    @Size(min = 3 , max = 20)
     private String name;
     @Positive
+    @Min(10)
+    @Max(100)
     private int age ;
 }
