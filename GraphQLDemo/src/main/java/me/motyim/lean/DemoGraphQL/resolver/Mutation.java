@@ -7,6 +7,8 @@ import me.motyim.lean.DemoGraphQL.model.Book;
 import me.motyim.lean.DemoGraphQL.repository.AuthorRepository;
 import me.motyim.lean.DemoGraphQL.repository.BookRepository;
 
+import java.util.Optional;
+
 public class Mutation implements GraphQLMutationResolver {
     private BookRepository bookRepository;
     private AuthorRepository authorRepository;
@@ -39,15 +41,22 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
     public boolean deleteBook(Long id) {
-        bookRepository.delete(id);
+        Optional<Book> book = bookRepository.findById(id);
+        bookRepository.delete(book.get());
+//         bookRepository.delete(id);
         return true;
     }
 
     public Book updateBookPageCount(Integer pageCount, Long id) {
-        Book book = bookRepository.findOne(id);
-        if(book == null) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if(!optionalBook.isPresent()) {
             throw new BookNotFoundException("The book to be updated was found", id);
         }
+        Book book = optionalBook.get();
+//        Book book = bookRepository.findOne(id);
+//        if(book != null) {
+//            throw new BookNotFoundException("The book to be updated was found", id);
+//        }
         book.setPageCount(pageCount);
 
         bookRepository.save(book);

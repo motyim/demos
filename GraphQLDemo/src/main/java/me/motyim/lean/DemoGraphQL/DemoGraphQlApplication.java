@@ -5,7 +5,6 @@ import me.motyim.lean.DemoGraphQL.model.Author;
 import me.motyim.lean.DemoGraphQL.model.Book;
 import me.motyim.lean.DemoGraphQL.repository.AuthorRepository;
 import me.motyim.lean.DemoGraphQL.repository.BookRepository;
-import me.motyim.lean.DemoGraphQL.resolver.BookResolver;
 import me.motyim.lean.DemoGraphQL.resolver.Mutation;
 import me.motyim.lean.DemoGraphQL.resolver.Query;
 import graphql.ExceptionWhileDataFetching;
@@ -53,10 +52,6 @@ public class DemoGraphQlApplication {
 		};
 	}
 
-	@Bean
-	public BookResolver authorResolver(AuthorRepository authorRepository) {
-		return new BookResolver(authorRepository);
-	}
 
 	@Bean
 	public Query query(AuthorRepository authorRepository, BookRepository bookRepository) {
@@ -68,6 +63,7 @@ public class DemoGraphQlApplication {
 		return new Mutation(authorRepository, bookRepository);
 	}
 
+	// to init data into database
 	@Bean
 	public CommandLineRunner demo(AuthorRepository authorRepository, BookRepository bookRepository) {
 		return (args) -> {
