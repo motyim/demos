@@ -1,0 +1,21 @@
+#schema {
+#    query: Query
+#    mutation: Mutation
+#}
+#
+#Project meta data
+type Info {
+    description: String
+    version: String!
+    title: String!
+    contactName: String
+    contactUrl: String
+    contactEmail: String
+    licenseName: String
+    licenseUrl: String
+}
+
+type Query {
+    getInfo: Info
+}
+
