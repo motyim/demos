@@ -38,8 +38,8 @@ mutation {
 }
 ```
 # Source
- * [Building a GraphQL Server with Spring Boot](https://www.pluralsight.com/guides/java-and-j2ee/building-a-graphql-server-with-spring-boot).
-
+ * [Building a GraphQL Server with Spring Boot](https://www.pluralsight.com/guides/building-a-graphql-server-with-spring-boot).
+ * [Authentication GraphQl](https://www.howtographql.com/graphql-java/5-authentication/)
 # License
 MIT
 

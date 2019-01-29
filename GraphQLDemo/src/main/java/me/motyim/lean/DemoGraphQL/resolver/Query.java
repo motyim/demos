@@ -1,9 +1,7 @@
 package me.motyim.lean.DemoGraphQL.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import me.motyim.lean.DemoGraphQL.model.Author;
-import me.motyim.lean.DemoGraphQL.model.Book;
-import me.motyim.lean.DemoGraphQL.model.Info;
+import me.motyim.lean.DemoGraphQL.model.*;
 import me.motyim.lean.DemoGraphQL.repository.AuthorRepository;
 import me.motyim.lean.DemoGraphQL.repository.BookRepository;
 
@@ -41,5 +39,7 @@ public class Query implements GraphQLQueryResolver {
         info.setDescription(" A simple Demo for query and  mutation in graphql using spring boot");
         return info;
     }
+
+
 
 }

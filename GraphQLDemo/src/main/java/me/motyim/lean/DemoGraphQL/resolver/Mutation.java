@@ -1,21 +1,26 @@
 package me.motyim.lean.DemoGraphQL.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.GraphQLException;
 import me.motyim.lean.DemoGraphQL.exception.BookNotFoundException;
-import me.motyim.lean.DemoGraphQL.model.Author;
-import me.motyim.lean.DemoGraphQL.model.Book;
+import me.motyim.lean.DemoGraphQL.model.*;
 import me.motyim.lean.DemoGraphQL.repository.AuthorRepository;
 import me.motyim.lean.DemoGraphQL.repository.BookRepository;
+import me.motyim.lean.DemoGraphQL.repository.UserRepository;
 
 import java.util.Optional;
 
+// TODO: 1/28/2019 make this using spring autowire
 public class Mutation implements GraphQLMutationResolver {
+
     private BookRepository bookRepository;
     private AuthorRepository authorRepository;
+    private UserRepository userRepository;
 
-    public Mutation(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public Mutation(AuthorRepository authorRepository, BookRepository bookRepository,UserRepository userRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     public Author newAuthor(String firstName, String lastName) {
@@ -43,7 +48,6 @@ public class Mutation implements GraphQLMutationResolver {
     public boolean deleteBook(Long id) {
         Optional<Book> book = bookRepository.findById(id);
         bookRepository.delete(book.get());
-//         bookRepository.delete(id);
         return true;
     }
 
@@ -53,14 +57,28 @@ public class Mutation implements GraphQLMutationResolver {
             throw new BookNotFoundException("The book to be updated was found", id);
         }
         Book book = optionalBook.get();
-//        Book book = bookRepository.findOne(id);
-//        if(book != null) {
-//            throw new BookNotFoundException("The book to be updated was found", id);
-//        }
         book.setPageCount(pageCount);
 
         bookRepository.save(book);
 
         return book;
+    }
+
+    public User createUser(String name , AuthData authData){
+        User user = new User();
+        user.setName(name);
+        user.setEmail(authData.getEmail());
+        user.setPassword(authData.getPassword());
+        return userRepository.save(user);
+    }
+
+    public SigninPayload signinUser(AuthData auth) {
+        User user = userRepository.findByEmail(auth.getEmail());
+        if (user.getPassword().equals(auth.getPassword())) {
+            // TODO: 1/29/2019 make token with JWT 
+            return new SigninPayload(user.getId().toString(), user);
+        }
+        // TODO: 1/29/2019 see exception
+        throw new GraphQLException("Invalid credentials");
     }
 }
