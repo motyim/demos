@@ -1,13 +1,15 @@
 package me.motyim.springbootcaching.model;
 
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static javax.management.timer.Timer.ONE_SECOND;
 
 @Component
 public class SimpleBookRepository implements BookRepository {
@@ -34,8 +36,9 @@ public class SimpleBookRepository implements BookRepository {
     }
 
     @Override
-//    @Cacheable("booksSizeRandom")
-    @CachePut("booksSizeRandom")
+    @Cacheable("booksSizeRandom")
+    // get data in every moment
+//    @CachePut("booksSizeRandom")
     public List<Book> getRandomBooksOf(int size){
         simulateSlowService();
         System.out.println(">> get form method");
@@ -44,6 +47,13 @@ public class SimpleBookRepository implements BookRepository {
             books.add(new Book(new Random().nextInt()+"","some book"));
         }
         return books;
+    }
+
+    @Override
+    @Scheduled(fixedRate = ONE_SECOND * 6)
+    @CacheEvict(value = "booksSizeRandom",allEntries = true)
+    public void clearCache(){
+        System.out.println("CacheCleared ... ");
     }
 
     // Don't do this at home

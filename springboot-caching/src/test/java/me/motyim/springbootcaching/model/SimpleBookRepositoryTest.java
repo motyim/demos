@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static javax.management.timer.Timer.ONE_SECOND;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -49,6 +50,25 @@ public class SimpleBookRepositoryTest {
         System.out.println("... get random books size");
         List<Book> books = bookRepository.getRandomBooksOf(2);
         books.forEach(System.out::println);
+
+        books = bookRepository.getRandomBooksOf(2);
+        books.forEach(System.out::println);
+    }
+
+    @Test
+    public void fetchRandomWithClearCache(){
+        System.out.println("... get random books size with clear");
+        List<Book> books = bookRepository.getRandomBooksOf(2);
+        books.forEach(System.out::println);
+
+        try {
+            System.out.println("timer Started");
+            long time = ONE_SECOND*10;
+            Thread.sleep(time);
+            System.out.println("timer finished");
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
 
         books = bookRepository.getRandomBooksOf(2);
         books.forEach(System.out::println);
