@@ -73,6 +73,16 @@ public class SimpleBookRepositoryTest {
     }
 
     @Test
+    public void fetchRandomBookListWithoutKey(){
+        System.out.println("... get random books size without key");
+        List<Book> books = bookRepository.getRandomBooksWithFixSizeWithNoArgs();
+        books.forEach(System.out::println);
+
+        books = bookRepository.getRandomBooksWithFixSizeWithNoArgs();
+        books.forEach(System.out::println);
+    }
+
+    @Test
     public void fetchRandomWithClearCache(){
         System.out.println("... get random books size with clear");
         List<Book> books = bookRepository.getRandomBooksOf(2);

@@ -63,6 +63,18 @@ public class SimpleBookRepository implements BookRepository {
     }
 
     @Override
+    @Cacheable(value = "getRandomBooksWithFixSizeWithNoArgs")
+    public List<Book> getRandomBooksWithFixSizeWithNoArgs(){
+        simulateSlowService();
+        System.out.println(">> get form method");
+        List <Book> books = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            books.add(new Book(new Random().nextInt()+"","some book"));
+        }
+        return books;
+    }
+
+    @Override
 //    @Scheduled(fixedRate = ONE_SECOND * 6)
     @CacheEvict(value = "booksSizeRandom",allEntries = true)
     public void clearCache(){

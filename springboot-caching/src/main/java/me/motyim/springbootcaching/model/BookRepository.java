@@ -19,5 +19,8 @@ public interface BookRepository {
     @Cacheable("booksSizeRandom")
     List<Book> getRandomBooksOfWithKey(int size);
 
+    @Cacheable(value = "getRandomBooksWithFixSizeWithNoArgs")
+    List<Book> getRandomBooksWithFixSizeWithNoArgs();
+
     void clearCache();
 }
