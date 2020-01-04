@@ -75,6 +75,11 @@ public class SimpleBookRepository implements BookRepository {
     }
 
     @Override
+    public List<Book> getListCashed(){
+        return getRandomBooksWithFixSizeWithNoArgs();
+    }
+
+    @Override
 //    @Scheduled(fixedRate = ONE_SECOND * 6)
     @CacheEvict(value = "booksSizeRandom",allEntries = true)
     public void clearCache(){

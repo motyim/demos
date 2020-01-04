@@ -83,6 +83,17 @@ public class SimpleBookRepositoryTest {
     }
 
     @Test
+    public void fetchFromNotCashedMethod(){
+        System.out.println("... get random books size from not cached method");
+        List<Book> books = bookRepository.getListCashed();
+        books.forEach(System.out::println);
+
+        books = bookRepository.getListCashed();
+        books.forEach(System.out::println);
+    }
+
+
+    @Test
     public void fetchRandomWithClearCache(){
         System.out.println("... get random books size with clear");
         List<Book> books = bookRepository.getRandomBooksOf(2);
