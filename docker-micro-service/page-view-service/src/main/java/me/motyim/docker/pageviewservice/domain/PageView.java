@@ -2,6 +2,7 @@ package me.motyim.docker.pageviewservice.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class PageView {
@@ -12,7 +13,7 @@ public class PageView {
     @Column
     private String pageUrl;
     @Column
-    private LocalDateTime time ;
+    private Date time ;
     @Column
     private String correlationId;
 
@@ -32,11 +33,11 @@ public class PageView {
         this.pageUrl = pageUrl;
     }
 
-    public LocalDateTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

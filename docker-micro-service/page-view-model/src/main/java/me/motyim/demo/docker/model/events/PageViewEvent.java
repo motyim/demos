@@ -3,17 +3,16 @@ package me.motyim.demo.docker.model.events;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @XmlRootElement
 public class PageViewEvent {
 
-    @XmlElement
     private String pageUrl;
-    @XmlElement
-    private LocalDateTime time ;
-    @XmlElement
+    private Date time;
     private String correlationId;
 
+    @XmlElement
     public String getPageUrl() {
         return pageUrl;
     }
@@ -22,14 +21,16 @@ public class PageViewEvent {
         this.pageUrl = pageUrl;
     }
 
-    public LocalDateTime getTime() {
+    @XmlElement
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
+    @XmlElement
     public String getCorrelationId() {
         return correlationId;
     }

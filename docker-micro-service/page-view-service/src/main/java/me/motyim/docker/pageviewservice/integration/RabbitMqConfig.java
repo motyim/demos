@@ -5,7 +5,6 @@ import me.motyim.docker.pageviewservice.domain.PageView;
 import me.motyim.docker.pageviewservice.repository.PageViewRepo;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +16,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
-import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXB;
 import java.io.ByteArrayInputStream;
