@@ -12,10 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.amqp.inbound.AmqpInboundChannelAdapter;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.dsl.MessageChannels;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
 
 import javax.xml.bind.JAXB;
 import java.io.ByteArrayInputStream;
@@ -57,21 +55,18 @@ public class RabbitMqConfig {
     @Bean
     @ServiceActivator(inputChannel = AMQP_CHANNEL)
     public MessageHandler pageViewMessageHandler(PageViewRepo repo){
-        return new MessageHandler() {
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-                System.out.println("Get message...");
-                String xmlMessage = (String) message.getPayload();
-                System.out.println(xmlMessage);
-                InputStream stream = new ByteArrayInputStream(xmlMessage.getBytes(StandardCharsets.UTF_8));
-                PageViewEvent pageViewEvent = JAXB.unmarshal(stream, PageViewEvent.class);
-                PageView pageView = new PageView();
-                pageView.setPageUrl(pageViewEvent.getPageUrl());
-                pageView.setCorrelationId(pageViewEvent.getCorrelationId());
-                pageView.setTime(pageViewEvent.getTime());
-                repo.save(pageView);
-                System.out.println("End Handler ...");
-            }
+        return message -> {
+            System.out.println("Get message...");
+            String xmlMessage = (String) message.getPayload();
+            System.out.println(xmlMessage);
+            InputStream stream = new ByteArrayInputStream(xmlMessage.getBytes(StandardCharsets.UTF_8));
+            PageViewEvent pageViewEvent = JAXB.unmarshal(stream, PageViewEvent.class);
+            PageView pageView = new PageView();
+            pageView.setPageUrl(pageViewEvent.getPageUrl());
+            pageView.setCorrelationId(pageViewEvent.getCorrelationId());
+            pageView.setTime(pageViewEvent.getTime());
+            repo.save(pageView);
+            System.out.println("End Handler ...");
         };
     }
 }
