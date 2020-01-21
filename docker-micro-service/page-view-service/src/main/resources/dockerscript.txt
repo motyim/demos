@@ -1,0 +1,6 @@
+docker run --name pageviewservice -p 8082:8082 \
+--link docker-micro-serive-demo:mysql \
+--link docker-micro-service-rabbitmq:myrabbitmq \
+-e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/docker-demo \
+-e SPRING_RABBITMQ_HOST=myrabbitmq \
+motyim/page-view-service
