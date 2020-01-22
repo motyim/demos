@@ -16,6 +16,9 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <docker.image.prefix>motyim</docker.image.prefix>
+        <!--Set to name of project-->
+        <docker.image.name>page-view-client</docker.image.name>
     </properties>
 
     <dependencies>
@@ -31,6 +34,19 @@
             <groupId>me.motyim.docker</groupId>
             <artifactId>page-view-model</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- API, java.xml.bind module -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <!-- Runtime, com.sun.xml.bind module -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,11 +67,125 @@
     </dependencies>
 
     <build>
+        <finalName>pageviewclient</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.33.0</version>
+
+                <configuration>
+                    <verbose>true</verbose>
+                    <images>
+                        <image>
+                            <name>${docker.image.prefix}/${docker.image.name}</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}/src/main/resources/</dockerFileDir>
+
+                                <!--copies artficact to docker build dir in target-->
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <tags>
+                                    <tag>latest</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8081:8081</port>
+                                </ports>
+                                <links>
+                                    <link>myrabbitmq:rabbitmq</link>
+                                </links>
+                                <env>
+                                    <SPRING_RABBITMQ_HOST>rabbitmq</SPRING_RABBITMQ_HOST>
+                                </env>
+                                <dependsOn>
+                                    <container>myrabbitmq</container>
+                                    <container>pageviewservice</container>
+                                </dependsOn>
+                            </run>
+                        </image>
+                        <!--mysql container-->
+                        <image>
+                            <name>mysql</name>
+                            <alias>mysqldb</alias>
+                            <run>
+                                <!--expose port for dn-->
+                                <ports>
+                                    <port>3306:3306</port>
+                                </ports>
+                                <!--set env prams for mysql image-->
+                                <env>
+                                    <MYSQL_DATABASE>pageviewservice</MYSQL_DATABASE>
+                                    <MYSQL_ROOT_PASSWORD>root</MYSQL_ROOT_PASSWORD>
+                                </env>
+                                <!--wait for db to start-->
+                                <wait>
+                                    <time>10000</time>
+                                </wait>
+                            </run>
+                        </image>
+                        <!--rabbit container-->
+                        <image>
+                            <name>rabbitmq</name>
+                            <alias>myrabbitmq</alias>
+                            <run>
+                                <ports>
+                                    <port>5671</port>
+                                    <port>5672</port>
+                                    <port>4369</port>
+                                    <port>25672</port>
+                                </ports>
+                                <!--wait for db to start-->
+                                <wait>
+                                    <time>10000</time>
+                                </wait>
+                            </run>
+                        </image>
+
+                        <!--docker run &#45;&#45;name pageviewservice -p 8081:8081 &#45;&#45;link rabbitmq:rabbitmq &#45;&#45;link mysqldb:mysqldb-->
+                        <!-- -e SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/pageviewservice -e SPRING_PROFILES_ACTIVE=mysql-->
+                        <!-- -e SPRING_RABBITMQ_HOST=rabbitmq springframeworkguru/pageviewservice-->
+                        <image>
+                            <name>motyim/page-view-service</name>
+                            <alias>pageviewservice</alias>
+                            <run>
+                                <ports>
+                                    <port>8082:8082</port>
+                                </ports>
+                                <links>
+                                    <link>myrabbitmq:rabbitmq</link>
+                                    <link>mysqldb:mysqldb</link>
+                                </links>
+                                <env>
+                                    <SPRING_DATASOURCE_URL>jdbc:mysql://mysqldb:3306/pageviewservice
+                                    </SPRING_DATASOURCE_URL>
+                                    <SPRING_RABBITMQ_HOST>rabbitmq</SPRING_RABBITMQ_HOST>
+                                </env>
+                                <dependsOn>
+                                    <container>myrabbitmq</container>
+                                    <container>mysql</container>
+                                </dependsOn>
+                                <wait>
+<!--                                    <http>-->
+<!--                                        <url>http://localhost:8081/health</url>-->
+<!--                                        <method>GET</method>-->
+<!--                                        <status>200..399</status>-->
+<!--                                    </http>-->
+                                    <time>75000</time>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
