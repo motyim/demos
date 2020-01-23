@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    ports:
+    - '3306:3306'
+    environment:
+      MYSQL_DATABASE: pageviewservice
+      MYSQL_ROOT_PASSWORD: 'root'
+
+  myrabbitmq:
+    image: rabbitmq
+    restart: always
+    ports:
+      - 5671:5671
+      - 5672:5672
+      - 4369:4369
+      - 25672:25672
+
+  pageviewservice:
+    image: motyim/page-view-service
+    restart: always
+    ports:
+    - 8082:8082
+    depends_on:
+      - myrabbitmq
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://db:3306/pageviewservice'
+      SPRING_RABBITMQ_HOST: myrabbitmq
+
+  pageviewclient:
+    image: motyim/page-view-client
+    restart: always
+    ports:
+    - 8081:8081
+    depends_on:
+      - myrabbitmq
+      - pageviewservice
+    environment:
+      SPRING_RABBITMQ_HOST: myrabbitmq
