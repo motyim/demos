@@ -9,6 +9,8 @@ services:
     environment:
       MYSQL_DATABASE: pageviewservice
       MYSQL_ROOT_PASSWORD: 'root'
+    networks:
+      - database_network
 
   myrabbitmq:
     image: rabbitmq
@@ -18,6 +20,8 @@ services:
       - 5672:5672
       - 4369:4369
       - 25672:25672
+    networks:
+      - rabbitmq_network
 
   pageviewservice:
     image: motyim/page-view-service
@@ -30,6 +34,9 @@ services:
     environment:
       SPRING_DATASOURCE_URL: 'jdbc:mysql://db:3306/pageviewservice'
       SPRING_RABBITMQ_HOST: myrabbitmq
+    networks:
+      - database_network
+      - rabbitmq_network
 
   pageviewclient:
     image: motyim/page-view-client
@@ -46,3 +53,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    networks:
+      - rabbitmq_network
+networks:
+  rabbitmq_network:
+    driver: overlay
+  database_network:
+    driver: overlay
