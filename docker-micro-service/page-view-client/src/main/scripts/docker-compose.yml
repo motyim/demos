@@ -11,7 +11,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     networks:
       - database_network
-    deploye:
+    deploy:
       replicas: 1
 
   myrabbitmq:
@@ -24,7 +24,7 @@ services:
       - 25672:25672
     networks:
       - rabbitmq_network
-    deploye:
+    deploy:
       replicas: 1
 
   pageviewservice:
@@ -41,7 +41,7 @@ services:
     networks:
       - database_network
       - rabbitmq_network
-    deploye:
+    deploy:
       replicas: 3
 
   pageviewclient:
@@ -61,7 +61,7 @@ services:
       retries: 3
     networks:
       - rabbitmq_network
-    deploye:
+    deploy:
       replicas: 3
 networks:
   rabbitmq_network:
