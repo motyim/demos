@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  spring_solr:
+    image: solr:8
+    restart: always
+    ports:
+      - 8983:8983
+    volumes:
+      - ./src/main/resources/solr/:/var/solr
+    networks:
+      - solr_network
+    deploy:
+      replicas: 1
+
+  spring_client:
+    image: motyim/spring-solr-demo
+    ports:
+      - 8080:8080
+    networks:
+      - solr_network
+    environment:
+      SPRING_DATA_SOLR_HOST: 'http://spring_solr:8983/solr/'
+    deploy:
+      replicas: 1
+
+networks:
+  solr_network:
+    driver: overlay

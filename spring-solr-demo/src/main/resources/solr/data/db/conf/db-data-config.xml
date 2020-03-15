@@ -1,0 +1,14 @@
+<dataConfig>
+    <dataSource driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306" user="root" password="root" />
+    <document name="employees">
+        <entity name="employee" query="SELECT t.*
+			FROM Solr.Employee t">
+			<field column="id" name="id" />
+			<field column="first_name" name="firstname" />
+			<field column="last_name" name="lastname" />
+			<field column="gender" name="gender" />
+			<field column="age" name="age" />
+        </entity>
+    </document>
+</dataConfig>
+
