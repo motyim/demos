@@ -2,6 +2,7 @@
 
 val junit_version: String by project
 val kluent_version: String by project
+val mockk_version: String by project
 
 plugins {
     java
@@ -22,6 +23,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
     testImplementation("org.amshove.kluent:kluent:$kluent_version")
+    testImplementation("io.mockk:mockk:$mockk_version")
 }
 
 configure<JavaPluginConvention> {
