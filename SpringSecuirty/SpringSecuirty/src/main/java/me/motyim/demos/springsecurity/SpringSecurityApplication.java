@@ -1,13 +1,13 @@
-package me.motyim.demos.springsecuirty;
+package me.motyim.demos.springsecurity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecuirtyApplication {
+public class SpringSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecuirtyApplication.class, args);
+        SpringApplication.run(SpringSecurityApplication.class, args);
     }
 
 }

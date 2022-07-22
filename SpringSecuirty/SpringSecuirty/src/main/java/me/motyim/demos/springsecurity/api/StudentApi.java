@@ -1,7 +1,7 @@
-package me.motyim.demos.springsecuirty.api;
+package me.motyim.demos.springsecurity.api;
 
 import com.google.common.collect.Lists;
-import me.motyim.demos.springsecuirty.dto.Student;
+import me.motyim.demos.springsecurity.dto.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

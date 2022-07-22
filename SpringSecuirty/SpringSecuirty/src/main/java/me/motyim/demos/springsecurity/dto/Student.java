@@ -1,4 +1,4 @@
-package me.motyim.demos.springsecuirty.dto;
+package me.motyim.demos.springsecurity.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
